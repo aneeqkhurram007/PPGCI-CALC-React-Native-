@@ -47,7 +47,7 @@ const MainApp = () => {
           {Array(listCount)
             .fill(<InputField />)
             .map((item, index) => (
-              <InputField key={index} id={index} />
+              <InputField key={index} reset={state.reset} id={index} />
             ))}
         </ScrollView>
       </KeyboardAvoidingView>
@@ -60,7 +60,12 @@ const MainApp = () => {
         <Button
           title="Reset Fields"
           color={"red"}
-          onPress={() => setlistCount(defaultListCount)}
+          onPress={() => {
+            setlistCount(defaultListCount);
+            dispatch({
+              type: "RESET_ITEMS",
+            });
+          }}
         />
       </View>
 

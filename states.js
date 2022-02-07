@@ -16,7 +16,6 @@ const reducer = (state, action) => {
       return state;
 
     case "UPDATE_ITEM":
-      console.log("State: ", state);
       const updatedItems = state.items.map((item) => {
         if (item.id === action.payload.id) {
           item.ppg = action.payload.ppg;
@@ -42,6 +41,7 @@ const reducer = (state, action) => {
       });
       state = {
         ...state,
+        items: removedItems,
         ppgSum: 0,
         weightSum: 0,
         totalSum: 0,
@@ -49,7 +49,7 @@ const reducer = (state, action) => {
       };
       return state;
     case "CHANGE_RESET":
-      state = { reset: false };
+      state = { ...state, reset: false };
       return state;
     default:
       return state;

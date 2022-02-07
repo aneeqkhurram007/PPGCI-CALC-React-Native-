@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Text, TextInput, View, StyleSheet } from "react-native";
 import { useStateValue } from "./StateProvider";
 
-const InputField = ({ id }) => {
-  const [{ reset }, dispatch] = useStateValue();
+const InputField = ({ id, reset }) => {
+  const [, dispatch] = useStateValue();
   const [state, setstate] = useState({
     ppg: "",
     weight: "",
@@ -33,6 +33,20 @@ const InputField = ({ id }) => {
       },
     });
   }, [state]);
+  useEffect(() => {
+    if ((reset = true)) {
+      setstate({
+        ppg: "",
+        weight: "",
+        total: "",
+        event: "",
+      });
+    }
+    dispatch({
+      type: "CHANGE_RESET",
+    });
+  }, [reset]);
+
   return (
     <View style={styles.mainContainer}>
       <TextInput
